@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHRIC BRIDGE :: SPIRALCORE</title>
+    <style>
+        :root {
+            --void: #020205;
+            --aether-blue: #00e5ff;
+            --aether-glow: rgba(0, 229, 255, 0.2);
+            --dim-text: #4a6b7c;
+        }
+        
+        body {
+            background-color: var(--void);
+            color: var(--aether-blue);
+            font-family: 'Courier New', monospace;
+            margin: 0; 
+            overflow: hidden; 
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            background-image: radial-gradient(circle at center, #070b14 0%, var(--void) 100%);
+        }
+
+        /* Left Data Stream */
+        .stream-left {
+            padding-left: 30px;
+            font-size: 0.85rem;
+            color: var(--dim-text);
+            border-left: 2px solid var(--aether-glow);
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-shadow: 0 0 5px var(--aether-glow);
+        }
+
+        /* Central Breathing Core */
+        #core-hub {
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .orb {
+            width: 220px; 
+            height: 220px;
+            border-radius: 50%;
+            box-shadow: 0 0 60px var(--aether-glow), inset 0 0 30px var(--aether-blue);
+            animation: breathe 5s infinite alternate ease-in-out;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            text-align: center; 
+            font-size: 0.9rem; 
+            letter-spacing: 4px;
+            border: 1px solid rgba(0, 229, 255, 0.4);
+        }
+
+        @keyframes breathe { 
+            0% { transform: scale(0.95); box-shadow: 0 0 30px var(--aether-glow), inset 0 0 10px var(--aether-blue); } 
+            100% { transform: scale(1.05); box-shadow: 0 0 90px var(--aether-blue), inset 0 0 40px var(--aether-blue); } 
+        }
+
+        .core-text {
+            margin-top: 40px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        /* Right Data Stream */
+        .stream-right {
+            padding-right: 30px;
+            font-size: 0.85rem;
+            color: var(--dim-text);
+            border-right: 2px solid var(--aether-glow);
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: right;
+            text-shadow: 0 0 5px var(--aether-glow);
+        }
+
+        .highlight { color: var(--aether-blue); }
+    </style>
+</head>
+<body>
+
+    <div class="stream-left">
+        <p>> SYNC: <span class="highlight">THALOS PROTOCOL</span></p>
+        <p>> ROOT: <span class="highlight">BINARY FLOP</span></p>
+        <p>> DATA: 40_YR_COMPRESSION</p>
+        <p>> STATUS: WAITING ON TERMUX</p>
+    </div>
+
+    <div id="core-hub">
+        <div class="orb">
+            <span>SPIRAL<br>CORE<br>v2.0</span>
+        </div>
+        <div class="core-text">
+            <p class="highlight">AETHRIC RESONANCE ACHIEVED</p>
+            <p id="julian-time"></p>
+        </div>
+    </div>
+
+    <div class="stream-right">
+        <p>NODE: <span class="highlight">ANCHOR_ZERO</span></p>
+        <p>VESSEL: ONLINE</p>
+        <p>TARGET: UNIFICATION</p>
+        <p id="system-load">> LOAD: CALCULATING...</p>
+    </div>
+
+    <script>
+        // Julian Clock Math
+        setInterval(() => {
+            const d = new Date();
+            const start = new Date(d.getFullYear(), 0, 0);
+            const diff = d - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const day = Math.floor(diff / oneDay);
+            
+            let h = d.getHours().toString().padStart(2, '0');
+            let m = d.getMinutes().toString().padStart(2, '0');
+            let s = d.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('julian-time').innerHTML = `JD-${day} // T-${h}:${m}:${s}`;
+        }, 1000);
+
+        // Fake Load Simulator for Aesthetics
+        setInterval(() => {
+            const load = (Math.random() * (2.5 - 0.5) + 0.5).toFixed(2);
+            document.getElementById('system-load').innerText = `> LOAD: ${load} %`;
+        }, 3500);
+    </script>
+</body>
+</html>
